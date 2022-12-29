@@ -39,3 +39,49 @@ select input_date, count(customer_name) from tbl_customer group by input_date
 
 --tbl_customerから入力日ごとのrank別の件数はいくつか
 select input_date,rank, count(customer_name) from tbl_customer group by input_date,rank
+
+--単純CASE式
+CASE gender
+    WHEN '男' THEN 1
+    WHEN '女' THEN 2
+    ELSE 99
+END
+
+--検索CASE式
+CASE
+    WHEN gender = '男' THEN 1
+    WHEN gender = '女' THEN 2
+    ELSE 99
+END
+
+--tbl_staffからstaff_sex列が 1なら男性 2なら女性 として抽出(単純CASE式)
+SELECT 
+*,
+	case staff_sex
+	when 1 then '男性'
+	when 2 then '女性'
+	end
+
+FROM [project_job].[dbo].[tbl_staff]
+
+--tbl_staffからstaff_sex列が 1なら男性 2なら女性 として抽出(検索CASE式)
+SELECT 
+*,
+	case 
+	when staff_sex =  1 then '男性'
+	when staff_sex =  2 then '女性'
+	end '性別' --end の後には新しいカラム名を命名できる
+
+FROM [project_job].[dbo].[tbl_staff]
+
+
+--tbl_customerから株式会社○○なら'前株'、○○株式会社なら'後株'とわける
+SELECT 
+ *, 
+
+ case 
+ when customer_name like '株式会社%' then '前株'
+ when customer_name like '%株式会社' then '後株'
+ end
+
+FROM tbl_customer
