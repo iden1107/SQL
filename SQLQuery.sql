@@ -38,4 +38,4 @@ select count(customer_name) from tbl_customer where input_date =  '2012-10-01'
 select input_date, count(customer_name) from tbl_customer group by input_date
 
 --tbl_customer‚©‚ç“ü—Í“ú‚²‚Æ‚Ìrank•Ê‚ÌŒ”‚Í‚¢‚­‚Â‚©
-select * from tbl_staff_backup
+select input_date,rank, count(customer_name) from tbl_customer group by input_date,rank
