@@ -85,3 +85,58 @@ SELECT
  end
 
 FROM tbl_customer
+
+
+--“s“¹•{Œ§‚ğ’nˆæ•ª‚¯
+CASE
+    WHEN prefecture IN ('–kŠC“¹') THEN '–kŠC“¹'
+    WHEN prefecture IN ('ÂXŒ§', 'ŠâèŒ§', '‹{éŒ§', 'H“cŒ§', 'RŒ`Œ§', '•Ÿ“‡Œ§') THEN '“Œ–k'
+    ...
+    WHEN prefecture IN ('‰«“êŒ§') THEN '‰«“ê'
+    ELSE NULL
+END
+
+--ÀÛ‚ÌZŠ‚È‚çlike‚Å’nˆæ•ª‚¯‚·‚é‚Æ‚æ‚¢
+SELECT 
+ *, 
+ case 
+ when address like '“Œ‹“s%' 
+   or address like 'ˆïéŒ§%' 
+   or address like '_“ŞìŒ§%'
+  then 'ŠÖ“Œ'
+  when address like 'ˆ¤’mŒ§%' 
+   or address like 'Ã‰ªŒ§%' 
+  then '’†•”'
+ else '‚»‚Ì‚Ù‚©'
+ end 'area'
+
+FROM tbl_customer
+
+
+--’nˆæ‚²‚Æ‚ÌŒ”‚ğWŒv‚·‚é
+select 
+ count(customer_name),
+ case 
+ when address like '“Œ‹“s%' 
+   or address like 'ˆïéŒ§%' 
+   or address like '_“ŞìŒ§%'
+  then 'ŠÖ“Œ'
+  when address like 'ˆ¤’mŒ§%' 
+   or address like 'Ã‰ªŒ§%' 
+  then '’†•”'
+ else '‚»‚Ì‚Ù‚©'
+ end 'area'
+
+ from tbl_customer
+
+group by 
+ case 
+ when address like '“Œ‹“s%' 
+   or address like 'ˆïéŒ§%' 
+   or address like '_“ŞìŒ§%'
+  then 'ŠÖ“Œ'
+  when address like 'ˆ¤’mŒ§%' 
+   or address like 'Ã‰ªŒ§%' 
+  then '’†•”'
+ else '‚»‚Ì‚Ù‚©'
+ end 
